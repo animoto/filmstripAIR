@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:WindowedApplication 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	layout="absolute" creationComplete="go();"
+	backgroundColor="0xFFFFFF"
+	width="648" height="360">
+	<mx:Script>
+		<![CDATA[
+			import com.animoto.filmstrip.output.FrameDumper;
+			import mx.core.UIComponent;
+			import mx.core.Application;
+			public function go():void {
+				var holder:UIComponent = new UIComponent();
+				addChild(holder);
+				var example:FilmStripExample = new FilmStripExample();
+				holder.addChild(example);
+				example.addEventListener("starting", initDumper);
+			}
+			
+			public function initDumper(event:Event):void {
+				var dumper:FrameDumper = new FrameDumper(event.target.f, "dice_demo_1", "");
+			}
+		]]>
+	</mx:Script>
+</mx:WindowedApplication>
