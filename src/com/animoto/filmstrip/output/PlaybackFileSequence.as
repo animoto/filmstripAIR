@@ -11,6 +11,7 @@ package com.animoto.filmstrip.output
 	import flash.filesystem.File;
 	import flash.filesystem.FileMode;
 	import flash.filesystem.FileStream;
+	import flash.geom.Rectangle;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFormat;
@@ -68,6 +69,7 @@ package com.animoto.filmstrip.output
 			w = int(s[0]);
 			h = int(s[1]);
 			var frameRate:int = Math.max(1, int(f[0]));
+			trace(w,h,frameRate);
 			timer.delay = 1000 / frameRate;
 			
 			Application.application.width = w;
@@ -92,7 +94,7 @@ package com.animoto.filmstrip.output
 				fileStream.readBytes(b);
 				fileStream.close();
 				var data:BitmapData = new BitmapData(w, h, false, 0x0);
-				data.setPixels(data.rect, b);
+				data.setPixels(new Rectangle(0,0,w,h), b);
 				this.bitmap.bitmapData = data;
 		    }
 		}

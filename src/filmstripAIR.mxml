@@ -3,22 +3,30 @@
 	xmlns:mx="http://www.adobe.com/2006/mxml" 
 	layout="absolute" creationComplete="go();"
 	backgroundColor="0xFFFFFF"
-	width="648" height="360">
+	width="864" height="480">
 	<mx:Script>
 		<![CDATA[
+			import com.animoto.filmstrip.FilmStrip;
 			import com.animoto.filmstrip.output.FrameDumper;
 			import mx.core.UIComponent;
 			import mx.core.Application;
+
+			public var folderName:String = "dice_output_test"; // output folder name -- created in 'Documents/FilmStripOutput/'
+			public var extension:String = ""; // output file type -- "jpg", "png", or "" (bitmapData)
+			public var filmStrip:FilmStrip;
+			public var dumper:FrameDumper;
+
 			public function go():void {
 				var holder:UIComponent = new UIComponent();
 				addChild(holder);
-				var example:FilmStripExample = new FilmStripExample();
+				var example:FilmStripExample = new FilmStripExample(); // Project to render
 				holder.addChild(example);
-				example.addEventListener("starting", initDumper);
+				example.addEventListener("starting", initDumper); // Project should dispatch "starting" when render is starting.
 			}
 			
 			public function initDumper(event:Event):void {
-				var dumper:FrameDumper = new FrameDumper(event.target.f, "dice_demo_1", "");
+				filmStrip = event.target.filmStrip, // for now project should expose the filmStrip publicly
+				dumper = new FrameDumper(filmStrip, folderName, extension);
 			}
 		]]>
 	</mx:Script>

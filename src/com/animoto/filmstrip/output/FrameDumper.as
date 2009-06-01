@@ -39,7 +39,7 @@ package com.animoto.filmstrip.output
 			}
 			else if (extension.length>0) {
 				if (extension.charAt(0)!=".") {
-					extension = extension.slice(1);
+					extension = "." + extension;
 				}
 				encode = true;
 				switch (extension) {

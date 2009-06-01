@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:WindowedApplication 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	layout="absolute" creationComplete="go();"
+	backgroundColor="0xFFFFFF"
+	width="648" height="360"
+	invoke="onInvoke(event)">
+	<mx:Script>
+		<![CDATA[
+			import com.animoto.filmstrip.output.FrameDumper;
+			import mx.core.UIComponent;
+			import mx.core.Application;
+			
+			public var folderName:String = null;
+			public var extension:String = null;
+			public var dumper:FrameDumper;
+			
+			// For running this utility via the command line
+			public function onInvoke(invokeEvent:InvokeEvent):void {
+				if (dumper!=null) {
+					trace("\n** INVOKE CALLED DURING RUN **\n");
+					return;
+				}
+				if (invokeEvent.arguments.length > 0) {
+					for (var i:int=0; i<invokeEvent.arguments.length; i+=2) {
+						var command: String = invokeEvent.arguments[i];
+						var value: String = invokeEvent.arguments[i+1];
+						switch (command) {
+							
+							case "-folder":
+								folderName = value;
+								break;
+								
+							case "-extension":
+								extension = value;
+								break;
+						}
+					}
+				}
+				go();
+			}
+			
+			// TODO: probably make project implement an IFrameDumpable and then load it as a swf and listen for a starting event.
+			// (anyone wanna finish this util? feel free!)
+			public function go():void {
+				var holder:UIComponent = new UIComponent();
+				addChild(holder);
+				var example:FilmStripExample = new FilmStripExample();
+				holder.addChild(example);
+				example.addEventListener("starting", initDumper);
+			}
+			
+			public function initDumper(event:Event):void {
+				dumper = new FrameDumper(event.target.f, "dice_demo_longblur", "");
+			}
+			
+			public function uiChanged():void {
+				folderName = foldertxt.text;
+				extension = (extcb.selectedLabel.indexOf("none")>-1 ? "" : extcb.selectedLabel);
+			}
+		]]>
+	</mx:Script>
+	<mx:Panel id="uiPanel" visible="true" width="500" height="310" layout="absolute" horizontalCenter="0" verticalCenter="0" title="FilmStrip Frame Dumper">
+		<mx:Button x="43" y="151" label="Render" click="go()"/>
+		<mx:TextInput x="43" y="24" width="254" id="foldertxt"/>
+		<mx:Label x="43" y="54" text="folder name (will be created in Documents/FilmStripOutput)"/>
+		<mx:Label x="43" y="110" text="extension"/>
+		<mx:ComboBox x="43" y="80" dataProvider="[&quot;none (bitmapData)&quot;, &quot;jpg&quot;, &quot;png&quot;]" id="extcb"></mx:ComboBox>
+	</mx:Panel>
+</mx:WindowedApplication>
