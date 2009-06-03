@@ -19,7 +19,7 @@
 			public function go():void {
 				var holder:UIComponent = new UIComponent();
 				addChild(holder);
-				var example:FilmStripExample = new FilmStripExample(); // Project to render
+				var example:SplitScreenView = new A_Example3D(); // Project to render
 				holder.addChild(example);
 				example.addEventListener("starting", initDumper); // Project should dispatch "starting" when render is starting.
 			}

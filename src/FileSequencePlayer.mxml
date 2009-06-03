@@ -12,12 +12,12 @@
 	<![CDATA[
 		import com.animoto.filmstrip.output.PlaybackFileSequence;
 		import mx.core.UIComponent;
-			protected function onOpen():void {
-				var bitmapHolder:UIComponent = new UIComponent();
-				var player:PlaybackFileSequence = new PlaybackFileSequence();
-				bitmapHolder.addChild(player);
-				addChild(bitmapHolder);
-			}
+		protected function onOpen():void {
+			var bitmapHolder:UIComponent = new UIComponent();
+			var player:PlaybackFileSequence = new PlaybackFileSequence();
+			bitmapHolder.addChild(player);
+			addChild(bitmapHolder);
+		}
 	]]>
 </mx:Script>
 </mx:WindowedApplication>
