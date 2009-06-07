@@ -10,9 +10,16 @@
 			import com.animoto.filmstrip.output.FrameDumper;
 			import mx.core.UIComponent;
 			import mx.core.Application;
-
+			
+			// This is a VERY basic start for a frame-dumper utility in AIR.
+			// For now manually change the settings below (read the comments)
+			// be sure your class dispatches "starting" when the render's ready to go
+			// and has a public property called filmStrip that exposes the FilmStrip.
+			
 			public var folderName:String = "dice_output_test"; // output folder name -- created in 'Documents/FilmStripOutput/'
-			public var extension:String = ""; // output file type -- "jpg", "png", or "" (bitmapData)
+			
+			public var extension:String = "png"; // output file type -- "jpg", "png", or "" (bitmapData)
+			
 			public var filmStrip:FilmStrip;
 			public var dumper:FrameDumper;
 
