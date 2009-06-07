@@ -16,9 +16,12 @@
 			// be sure your class dispatches "starting" when the render's ready to go
 			// and has a public property called filmStrip that exposes the FilmStrip.
 			
+			// Notes on creating the MP4 from frames in FilmStrip project > 'README FIRST.rtf'
+			
 			public var folderName:String = "dice_output_test"; // output folder name -- created in 'Documents/FilmStripOutput/'
 			
-			public var extension:String = "png"; // output file type -- "jpg", "png", or "" (bitmapData)
+			public var extension:String = ""; // output file type -- "jpg", "png", or "" (bitmapData)
+											// jpg & png are erroring on load in FileSequencePlayer -- not sure why?
 			
 			public var filmStrip:FilmStrip;
 			public var dumper:FrameDumper;
